@@ -9,12 +9,13 @@ const Base = ({ children }) => {
             <div className="top-bar">
 
                 <div className="top-bar-left">
-                    <IndexLink to="/">React App</IndexLink>
+                    <IndexLink to="/">BTC News Hub</IndexLink>
                 </div>
 
                 {/*conditional statement to decide which menu to render*/}
                 {Auth.isUserAuthenticated() ? (
                     <div className="top-bar-right">
+                        <Link to="/dashboard">My Dashboard</Link>
                         <Link to="/logout">Log out</Link>
                     </div>
                 ) : (

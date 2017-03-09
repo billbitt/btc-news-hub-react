@@ -12,8 +12,9 @@ const app = express();
 // Tell app to look for static files in the below directories .
 app.use(express.static("./server/static/"));
 app.use(express.static("./client/dist/"));
-// Tell the app to parse HTTP body mesages.
-app.use(bodyParser.urlencoded({ extended: false}));
+// Tell the app to use body parser parse requests as top level middleware 
+app.use(bodyParser.urlencoded({ extended: false})); // parse application/x-www-form-urlencoded 
+app.use(bodyParser.json())  // parse application/json 
 // Pass the passport middleware.
 app.use(passport.initialize());
 
@@ -24,15 +25,17 @@ passport.use("local-signup", localSignupStrategy);
 passport.use("local-login", localLoginStrategy);
 
 // pass the authentication checker middleware.
-// we puth this here so that we can be sure that the middleware function will be executed before proceeding to any /api routes below.
+// we put this here so that we can be sure that the middleware function will be executed before proceeding to any /api routes below.
 const authCheckMiddleware = require("./server/middleware/auth-check");
 app.use("/api", authCheckMiddleware);
 
 // Routes.
 const authRoutes = require("./server/routes/auth"); 
 const apiRoutes = require("./server/routes/api"); 
+const publicApiRoutes = require("./server/routes/publicApi");
 app.use("/auth", authRoutes); 
 app.use("/api", apiRoutes); 
+app.use("/public/api", publicApiRoutes); 
 
 // server-site route that directs http routes back to the react app
 app.get("/*", function(req, res) {

@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+// helper functions
+function toLower (string) {
+  return string.toLowerCase();
+}
+
 // define the User model schema
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        index: {unique: true }
+        index: {unique: true },
+        set: toLower // store all emails as lower case so emails cant be double registered using different casing 
     },
     password: String,
     name: String

@@ -4,7 +4,8 @@ import { Card, CardTitle } from "material-ui/Card";
 const HomePage = () => {
     return (
         <Card className="container">
-            <CardTitle title="React Application" subtitle="This is the home page." />
+            <CardTitle title="BTC News Hub" subtitle="A place for bitcoin news and discussion." />
+            
         </Card>
     )
 };

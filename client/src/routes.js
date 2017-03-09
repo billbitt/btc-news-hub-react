@@ -1,8 +1,9 @@
 import Base from "./components/Base.jsx";
-import HomePage from "./components/HomePage.jsx";
+import HomePage from "./containers/HomePage.jsx";
 import LoginPage from "./containers/LoginPage.jsx";
 import SignUpPage from "./containers/SignUpPage.jsx";
 import DashboardPage from "./containers/DashboardPage.jsx";
+import UnauthorizedPage from "./containers/UnauthorizedPage.jsx";
 import Auth from "./modules/Auth";
 
 const routes = {
@@ -14,13 +15,7 @@ const routes = {
             // Index route.
             path: "/",
             // decide which component to render, depending on whether the user is authenticated.
-            getComponent: (location, callback) => {
-                if (Auth.isUserAuthenticated()) {
-                    callback(null, DashboardPage);
-                } else {
-                    callback(null, HomePage);
-                }
-            }
+            component: HomePage
         },
         {
             // Log in route.
@@ -31,6 +26,18 @@ const routes = {
             // Sign up route.
             path: "/signup",
             component: SignUpPage
+        },
+        {
+            // Index route.
+            path: "/dashboard",
+            // decide which component to render, depending on whether the user is authenticated.
+            getComponent: (location, callback) => {
+                if (Auth.isUserAuthenticated()) {
+                    callback(null, DashboardPage);
+                } else {
+                    callback(null, UnauthorizedPage);
+                }
+            }
         },
         {
             path: "/logout",
