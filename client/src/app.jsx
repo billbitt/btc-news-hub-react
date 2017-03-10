@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import injectTapEventPlugin from "react-tap-event-plugin";
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 // Import routes.
@@ -11,10 +12,10 @@ import routes from "./routes.js";
 // Remove tap delay, essential for MaterialUI to work properly on mobile.
 injectTapEventPlugin();
 
-// Create an App component that is wrapped in MuitThemeProvider.
+// Create an App component that is wrapped in MuitThemeProvider. 
 const App = () => {
     return (
-        <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                 <Router history={browserHistory} routes={routes} />
         </MuiThemeProvider>
     )

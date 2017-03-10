@@ -13,7 +13,7 @@ var CommentSchema = new mongoose.Schema({
         ]
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         default: null
     },
     dateCreated: {
@@ -25,7 +25,7 @@ var CommentSchema = new mongoose.Schema({
         default: Date.now
     },
     replies: [{ 
-        type: Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: "Reply"
     }],
     score: {

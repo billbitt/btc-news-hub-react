@@ -20,4 +20,4 @@ module.exports.connect = (uri) => {
 
     // Load models.
     require("./user");
-}
+} 

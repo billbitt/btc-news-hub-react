@@ -1,11 +1,11 @@
 const express = require("express");
 var News = require("../models/news.js");
+var Comment = require("../models/comments.js");
 
 const router = new express.Router();
 
 /* 
-after the user is authenticated, we let them see this route.  since everyone has the same role, they all see this route. 
-I suppose this is where I could implement authorization logic to give different routes based on what is in their token when it is validated and their "role" in the database.
+these routes do not require an authenticated user
 */
 
 router.post("/news", (req, res) => {
@@ -48,6 +48,22 @@ router.post("/news", (req, res) => {
             
         });
     }
+});
+
+router.get("/news", (req, res) => {
+    console.log("public/api/news get request received.")
+    //grabs all of the articles and render them in handlebars
+    News.find({})
+    .limit(10)
+    .sort({ dateCreated: 1 })
+    .populate("comments")
+    .exec(function(err, docs){
+        if (err) {
+            res.send(err);
+        } else {
+            res.status(200).json(docs);
+        };
+    });    
 });
 
 module.exports = router;
