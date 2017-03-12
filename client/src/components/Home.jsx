@@ -9,9 +9,6 @@ const Home = ({ newsData }) => {
                 <CardTitle title="BTC News Hub" subtitle="A place for bitcoin news and discussion." />
             </Card>
             {newsData.map((item, index) => {
-                {console.log("newsData", newsData)}
-                {console.log("newsData", item.title)}
-                {console.log("newsData", item.link)}
                 return < NewsItem key={index} title={item.title} link={item.link} />
             })}
 
